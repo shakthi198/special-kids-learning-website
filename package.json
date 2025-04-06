@@ -1,0 +1,20 @@
+{
+  "name": "sklad2",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon backend/server.js"
+  },
+  "author": "Shakthi",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "deepspeech": "^0.9.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "firebase": "^11.4.0",
+    "nodemon": "^3.1.9",
+    "passport": "^0.7.0",
+    "passport-google-oauth2": "^0.2.0"
+  }
+}
