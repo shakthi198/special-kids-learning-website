@@ -11,11 +11,12 @@ export const AppContextProvider = (props) => {
   const [isEducator, setIsEducator] = useState(true);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const navigate = useNavigate();
+  const Path = import.meta.env.VITE_API_URL;
 
   //Fetch all coureses
   const fetchAllCourses = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/courses");
+      const response = await fetch(`${Path}/api/courses`);
       const data = await response.json();
       console.log("Courses received from backend:", data); // Debugging
       setAllCourses(data);
@@ -30,16 +31,13 @@ export const AppContextProvider = (props) => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found. Please log in.");
 
-      const response = await fetch(
-        "http://localhost:5000/api/users/enrollments",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${Path}/api/users/enrollments`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
 
@@ -63,7 +61,7 @@ export const AppContextProvider = (props) => {
       }
 
       const response = await axios.post(
-        `http://localhost:5000/api/courses/${courseId}/progress`,
+        `${Path}/api/courses/${courseId}/progress`,
         { courseId, lectureId, userId }, // ✅ Fix: Include userId
         { headers: { Authorization: `Bearer ${token}` } }
       );

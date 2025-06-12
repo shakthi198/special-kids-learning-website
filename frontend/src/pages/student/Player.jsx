@@ -22,6 +22,7 @@ const Player = () => {
   const [playerData, setPlayerData] = useState(null);
   const [completedLectures, setCompletedLectures] = useState(new Set());
   const [loading, setLoading] = useState(false);
+  const Path = import.meta.env.VITE_API_URL;
 
   const toggleSection = (index) => {
     setOpenSections((prev) => ({ ...prev, [index]: !prev[index] }));
@@ -46,10 +47,9 @@ const Player = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const response = await axios.get(
-        `http://localhost:5000/api/courses/${courseId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await axios.get(`${Path}/api/courses/${courseId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       setCourseData(response.data);
       if (response.data.lectures?.length > 0) {
@@ -65,10 +65,9 @@ const Player = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const res = await axios.get(
-        `http://localhost:5000/api/courses/${courseId}/progress`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await axios.get(`${Path}/api/courses/${courseId}/progress`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (res.data.success) {
         setCompletedLectures(new Set(res.data.lectureCompleted || []));
@@ -94,7 +93,7 @@ const Player = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/courses/${courseId}/progress`,
+        `${Path}/api/courses/${courseId}/progress`,
         { userId, courseId, lectureId: playerData.lectureId }, // ✅ Now defined
         { headers: { Authorization: `Bearer ${token}` } }
       );

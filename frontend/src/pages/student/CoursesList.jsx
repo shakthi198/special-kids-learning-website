@@ -7,13 +7,15 @@ import cross_icon from "../../assets/cross-icon.png";
 
 const CoursesList = () => {
   const { navigate, allCourses } = useContext(AppContext);
+  const [, setAllCourses] = useState([]);
   const { input } = useParams();
   const [filteredCourse, setFilteredCourse] = useState([]);
+  const Path = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/courses");
+        const response = await fetch(`${Path}/api/courses`);
         const data = await response.json();
         console.log("Courses received in CoursesList:", data);
         setAllCourses(data);

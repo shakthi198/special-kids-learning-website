@@ -16,6 +16,7 @@ const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false); // Define the state variables
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState(null);
+  const Path = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Add the login-page class to the body element
@@ -30,10 +31,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/users/login",
-        { email, password }
-      );
+      const response = await axios.post(`${Path}/api/users/login`, {
+        email,
+        password,
+      });
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.userId);
@@ -68,10 +69,9 @@ const Login = () => {
       const idToken = await result.user.getIdToken(); // Get Firebase ID token
 
       // Send token to backend
-      const res = await axios.post(
-        "http://localhost:5000/api/users/google-login",
-        { token: idToken }
-      );
+      const res = await axios.post(`${Path}/api/users/google-login`, {
+        token: idToken,
+      });
 
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);

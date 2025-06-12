@@ -22,6 +22,7 @@ const CourseDetails = () => {
   const [playerData, setPlayerData] = useState(null);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId"); // Ensure it's not null
+  const Path = import.meta.env.VITE_API_URL;
 
   console.log("🔹 Retrieved token:", token);
   console.log(
@@ -48,7 +49,7 @@ const CourseDetails = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/api/courses/${id}`, {
+      const response = await fetch(`${Path}/api/courses/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -82,17 +83,14 @@ const CourseDetails = () => {
     try {
       if (!token || !userId) return;
 
-      const response = await fetch(
-        `http://localhost:5000/api/courses/${id}/enroll`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId }),
-        }
-      );
+      const response = await fetch(`${Path}/courses/${id}/enroll`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId }),
+      });
 
       const result = await response.json();
       console.log(result);
