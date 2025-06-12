@@ -11,7 +11,7 @@ import AddCourse from "./pages/Admin/AddCourse";
 import MyCourses from "./pages/Admin/MyCourses";
 import StudentEnroll from "./pages/Admin/StudentEnroll";
 import Loading from "./pages/student/Loading";
-import Student from "./pages/student/student";
+import Student from "./pages/student/Student";
 import ChatAi from "./pages/student/ChatAi";
 import Profile from "./pages/student/Profile";
 import Login from "./pages/student/Login";
