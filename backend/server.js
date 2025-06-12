@@ -19,6 +19,10 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use("/api/users", authRoutes);
 app.use("/api/courses", courseRoutes);
 
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
+
 //port
 const PORT = process.env.PORT || 5000;
 
