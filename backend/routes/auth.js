@@ -8,22 +8,17 @@ import { courseProgress } from "../models/CourseProgress.js"; // ✅ Fix
 
 const router = express.Router();
 
-import { initializeApp, cert } from "firebase-admin/app";
-
 const serviceAccountBase64 = process.env.FIREBASE_CONFIG_BASE64;
 
 const serviceAccount = JSON.parse(
   Buffer.from(serviceAccountBase64, "base64").toString("utf-8")
 );
 
-initializeApp({
-  credential: cert(serviceAccount),
-});
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
 // User Login (Email/Password)
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
