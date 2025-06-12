@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import admin from "firebase-admin";
 import { protect } from "../middlewares/auth.js";
-import { courseProgress } from "../models/courseProgress.js"; // ✅ Fix
+import { courseProgress } from "../models/CourseProgress.js"; // ✅ Fix
 
 const router = express.Router();
 

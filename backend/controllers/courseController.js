@@ -1,7 +1,7 @@
 import Course from "../models/Course.js";
 import User from "../models/User.js";
 import mongoose from "mongoose";
-import { courseProgress } from "../models/courseProgress.js";
+import { courseProgress } from "../models/CourseProgress.js";
 
 // Get all courses
 export const getCourses = async (req, res) => {
