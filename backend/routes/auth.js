@@ -9,7 +9,13 @@ import { courseProgress } from "../models/courseProgress.js"; // ✅ Fix
 const router = express.Router();
 
 // Load Firebase Admin SDK
-import serviceAccount from "../firebase-service-account.json" assert { type: "json" };
+// Add at the top of your file if not already using fs
+import fs from "fs";
+
+// Read the JSON file manually
+const serviceAccount = JSON.parse(
+  fs.readFileSync(new URL("../firebase-service-account.json", import.meta.url))
+);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
