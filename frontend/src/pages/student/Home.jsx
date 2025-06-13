@@ -11,6 +11,7 @@ import Insta from "../../assets/insta.png";
 import Linkedin from "../../assets/linkedin.png";
 import Tel from "../../assets/tel.png";
 import { AppContext } from "../../context/AppContext.jsx";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { navigate } = useContext(AppContext);
@@ -24,9 +25,9 @@ const Home = () => {
               <img id="logo" src={Cap} className="h-9 w-9" alt="UniKid Logo" />
               <span className="text-white italic text-2xl ml-1">UniKid</span>
             </a>
-            <a id="login" href="/login" className="text-white italic text-2xl">
+            <Link to="/login" className="text-white italic text-2xl">
               Login
-            </a>
+            </Link>
           </div>
         </div>
         <div className="flex p-12">
