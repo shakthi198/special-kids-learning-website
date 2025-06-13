@@ -17,6 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState(null);
   const Path = import.meta.env.VITE_API_URL;
+  console.log("API Path:", Path); // Log the API path for debugging
 
   useEffect(() => {
     // Add the login-page class to the body element
@@ -35,6 +36,8 @@ const Login = () => {
         email,
         password,
       });
+      console.log("Sending login data:", { email, password });
+
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.userId);
