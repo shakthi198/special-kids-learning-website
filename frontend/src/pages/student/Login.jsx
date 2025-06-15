@@ -84,7 +84,8 @@ const Login = () => {
         toast.success("User logged in successfully!", {
           position: "top-center",
         });
-        window.location.href = "/student";
+        console.log("Google login successful. Navigating to /student...");
+        navigate("/student");
       }
     } catch (error) {
       console.error("Failed to log in with Google:", error);
