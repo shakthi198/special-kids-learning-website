@@ -83,7 +83,7 @@ const CourseDetails = () => {
     try {
       if (!token || !userId) return;
 
-      const response = await fetch(`${Path}/courses/${id}/enroll`, {
+      const response = await fetch(`${Path}/api/courses/${id}/enroll`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
