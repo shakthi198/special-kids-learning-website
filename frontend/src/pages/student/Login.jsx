@@ -8,6 +8,7 @@ import axios from "axios";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { auth } from "../../../Firebase/firebaseConfig";
 import { toast } from "react-toastify";
+import Loading from "./Loading";
 
 const Login = () => {
   const { login, loginWithGoogle } = useAuth();
@@ -16,6 +17,7 @@ const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false); // Define the state variables
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState(null);
+  const [loading, setLoading] = useState(false);
   const Path = import.meta.env.VITE_API_URL;
   console.log("API Path:", Path); // Log the API path for debugging
 
@@ -41,8 +43,11 @@ const Login = () => {
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.userId);
-        console.log("Login successful, navigating to Dashboard page");
-        navigate("/student");
+        setLoading(true);
+        setTimeout(() => {
+          navigate("/student");
+        }, 3000);
+        setLoading(false);
       }
     } catch (error) {
       console.error("Failed to log in", error);
@@ -84,13 +89,21 @@ const Login = () => {
         toast.success("User logged in successfully!", {
           position: "top-center",
         });
-        console.log("Google login successful. Navigating to /student...");
-        navigate("/student");
+
+        setLoading(true);
+        setTimeout(() => {
+          navigate("/student");
+          setLoading(false);
+        }, 3000);
       }
     } catch (error) {
       console.error("Failed to log in with Google:", error);
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="login-container">
