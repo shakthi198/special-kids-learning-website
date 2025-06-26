@@ -33,6 +33,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(`${Path}/api/users/login`, {
         email,
@@ -43,11 +44,10 @@ const Login = () => {
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.userId);
-        setLoading(true);
+
         setTimeout(() => {
           navigate("/student");
         }, 3000);
-        setLoading(false);
       }
     } catch (error) {
       console.error("Failed to log in", error);
@@ -66,6 +66,7 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
+    setLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
 
@@ -90,10 +91,8 @@ const Login = () => {
           position: "top-center",
         });
 
-        setLoading(true);
         setTimeout(() => {
           navigate("/student");
-          setLoading(false);
         }, 3000);
       }
     } catch (error) {
